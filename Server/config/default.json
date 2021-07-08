@@ -1,0 +1,5 @@
+{
+  "jwtKey": "YourPrivateKey",
+  "mongodbName": "ron",
+  "mongoDbPass": "22334455"
+}
