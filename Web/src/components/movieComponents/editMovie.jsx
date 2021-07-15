@@ -9,6 +9,7 @@ const EditMovie = () => {
   const [state, setState] = useState({
     overview: "",
     poster_path: "",
+    backdrop_path: "",
     release_date: "",
     title: "",
     video: "",
@@ -27,6 +28,7 @@ const EditMovie = () => {
     title: Joi.string().min(2).max(255).required(),
     video: Joi.string().min(2).max(1024).required(),
     poster_path: Joi.string().min(2).max(1024).required(),
+    backdrop_path: Joi.string().min(2).max(1024).required(),
     overview: Joi.string().min(2).max(1024).required(),
     release_date: Joi.string().min(1).max(1024).required(),
     vote_average: Joi.string().min(1).max(1024).required(),
@@ -45,6 +47,7 @@ const EditMovie = () => {
       _id: data._id,
       overview: data.overview,
       poster_path: data.poster_path,
+      backdrop_path: data.backdrop_path,
       release_date: data.release_date,
       title: data.title,
       video: data.video,
@@ -81,8 +84,15 @@ const EditMovie = () => {
     }
   };
 
-  const { overview, poster_path, release_date, title, video, vote_average } =
-    state;
+  const {
+    overview,
+    poster_path,
+    release_date,
+    title,
+    video,
+    vote_average,
+    backdrop_path,
+  } = state;
   const { errors } = errorState;
 
   return (
@@ -97,13 +107,22 @@ const EditMovie = () => {
                 <label>Movie itle:</label>
                 {formService.input("title", handleChange, errors, title)}
               </div>
-              <div className="border-bottomb order-secondary mb-3 pb-2">
+              <div className="border-bottom order-secondary mb-3 pb-2">
                 <label>Poster path:</label>
                 {formService.input(
                   "poster_path",
                   handleChange,
                   errors,
                   poster_path
+                )}
+              </div>
+              <div className="border-bottom order-secondary mb-3 pb-2">
+                <label>Backdrop path:</label>
+                {formService.input(
+                  "backdrop_path",
+                  handleChange,
+                  errors,
+                  backdrop_path
                 )}
               </div>
               <div className="border-bottom border-secondary mb-3 pb-2">
@@ -116,18 +135,23 @@ const EditMovie = () => {
                 )}
               </div>
               <div className="border-bottom border-secondary mb-3 pb-2">
-                <label>Votea verage:</label>
-                {formService.input(
-                  "vote_average",
-                  handleChange,
-                  errors,
-                  vote_average
-                )}
-              </div>
-              <div className="border-bottom border-secondary mb-3 pb-2">
                 <label>Video:</label>
                 {formService.input("video", handleChange, errors, video)}
               </div>
+              <div className="border-bottom border-secondary mb-3 pb-4">
+                <label>Votea verage:</label>
+                <input
+                  onChange={handleChange}
+                  name="vote_average"
+                  type="number"
+                  className="form-control"
+                  placeholder="vote average"
+                  value={vote_average}
+                  min="1"
+                  max="10"
+                />
+              </div>
+
               <div className="mb-3 pb-2">
                 <textarea
                   onChange={handleChange}
