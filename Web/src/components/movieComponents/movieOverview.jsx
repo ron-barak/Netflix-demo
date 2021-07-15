@@ -52,7 +52,7 @@ const MovieOverview = () => {
                   data-autoplay="true"
                   className="btn btn-light mt-3 px-4"
                 >
-                  <i class="fas fa-play mr-2"></i> Play
+                  <i className="fas fa-play mr-2"></i> Play
                 </button>
               </div>
             </div>
