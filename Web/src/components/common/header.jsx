@@ -15,7 +15,7 @@ const Header = ({ path }) => {
           <button className="btn btn-danger py-0 px-3">
             <i
               style={{ fontSize: "26px" }}
-              class="fas fa-long-arrow-alt-right"
+              className="fas fa-long-arrow-alt-right"
             ></i>
           </button>
         </Link>
