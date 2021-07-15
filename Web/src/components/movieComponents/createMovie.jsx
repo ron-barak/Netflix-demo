@@ -10,6 +10,7 @@ const CreateMovie = ({ setDataFromServer, userConnected }) => {
   const [state, setState] = useState({
     overview: "",
     poster_path: "",
+    backdrop_path: "",
     release_date: "",
     title: "",
     video: "",
@@ -24,6 +25,7 @@ const CreateMovie = ({ setDataFromServer, userConnected }) => {
     title: Joi.string().min(2).max(255).required(),
     video: Joi.string().min(2).max(1024).required(),
     poster_path: Joi.string().min(2).max(1024).required(),
+    backdrop_path: Joi.string().min(2).max(1024).required(),
     overview: Joi.string().min(2).max(1024).required(),
     release_date: Joi.string().min(1).max(1024).required(),
     vote_average: Joi.string().min(1).max(1024).required(),
@@ -52,6 +54,7 @@ const CreateMovie = ({ setDataFromServer, userConnected }) => {
   };
 
   const { errors } = errorState;
+  const { release_date } = state;
 
   return (
     <>
@@ -100,9 +103,25 @@ const CreateMovie = ({ setDataFromServer, userConnected }) => {
                     <div className="form-group">
                       {formService.input("title", handleChange, errors)}
                       {formService.input("poster_path", handleChange, errors)}
-                      {formService.input("release_date", handleChange, errors)}
-                      {formService.input("vote_average", handleChange, errors)}
+                      {formService.input("backdrop_path", handleChange, errors)}
+                      {formService.input(
+                        "release_date",
+                        handleChange,
+                        errors,
+                        release_date,
+                        "date"
+                      )}
                       {formService.input("video", handleChange, errors)}
+
+                      <input
+                        onChange={handleChange}
+                        name="vote_average"
+                        type="number"
+                        className="form-control"
+                        placeholder="vote average"
+                        min="1"
+                        max="10"
+                      />
                     </div>
                     <textarea
                       onChange={handleChange}
