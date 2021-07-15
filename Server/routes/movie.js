@@ -14,16 +14,15 @@ router.get("/", async (req, res) => {
 router.post("/", auth, async (req, res) => {
   const { error } = validateMovie(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  user = await MovieModel.findOne({ _id: req.user._id });
-  let movie = new MovieModel({
-    title: req.body.title,
-    video: req.body.video,
-    poster_path: req.body.poster_path,
-    release_date: req.body.release_date,
-    overview: req.body.overview,
-    vote_average: req.body.vote_average,
-    user_id: req.user._id,
-  });
+  try {
+    let movie = new MovieModel(req.body);
+    movie.user_id = req.user._id;
+    await movie.save();
+    res.send(movie);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
   movies = await movie.save();
   res.send(movies);
